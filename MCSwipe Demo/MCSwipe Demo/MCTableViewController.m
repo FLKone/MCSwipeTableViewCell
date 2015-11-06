@@ -93,6 +93,8 @@ static NSUInteger const kMCNumItems = 7;
     UIView *listView = [self viewWithImageName:@"list"];
     UIColor *brownColor = [UIColor colorWithRed:206.0 / 255.0 green:149.0 / 255.0 blue:98.0 / 255.0 alpha:1.0];
     
+    UIColor *greyColor = [UIColor colorWithRed:227.0 / 255.0 green:227.0 / 255.0 blue:227.0 / 255.0 alpha:1.0];
+    
     // Setting the default inactive state color to the tableView background color
     [cell setDefaultColor:self.tableView.backgroundView.backgroundColor];
     
@@ -102,7 +104,13 @@ static NSUInteger const kMCNumItems = 7;
         [cell.textLabel setText:@"Switch Mode Cell"];
         [cell.detailTextLabel setText:@"Swipe to switch"];
         
-        [cell setSwipeGestureWithView:checkView color:greenColor mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+        cell.firstTrigger = 0.11;
+        cell.secondTrigger = 0.35;
+        
+        cell.defaultColor = [UIColor purpleColor];
+        cell.triggerColorFromZero = YES;
+        
+        [cell setSwipeGestureWithView:checkView color:greyColor mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
             NSLog(@"Did swipe \"Checkmark\" cell");
         }];
         
@@ -110,11 +118,14 @@ static NSUInteger const kMCNumItems = 7;
             NSLog(@"Did swipe \"Cross\" cell");
         }];
         
+        
+        
+        
         [cell setSwipeGestureWithView:clockView color:yellowColor mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState3 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
             NSLog(@"Did swipe \"Clock\" cell");
         }];
         
-        [cell setSwipeGestureWithView:listView color:brownColor mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState4 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+        [cell setSwipeGestureWithView:listView color:greyColor mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState4 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
             NSLog(@"Did swipe \"List\" cell");
         }];
     }
